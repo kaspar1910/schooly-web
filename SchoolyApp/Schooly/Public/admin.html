@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Schooly</title>
+</head>
+<link rel="stylesheet" href="css/style.css">
+<body>
+<div class="TopHeader">
+    <h1>Hola papa</h1>
+</div>
+
+<section class="download-section">
+    <h2>Upload</h2>
+
+    <div id="upload-message"></div>
+
+    <p>This is where upload and delete controls will go.</p>
+    <form action="/upload" method="POST" enctype="multipart/form-data">
+        <label for="htmlFile">Choose HTML file:</label>
+        <input type="file" id="htmlFile" name="htmlFile" accept=".html" required>
+        <button type="submit">Upload</button>
+    </form>
+
+    <h2>Slet Filer :)</h2>
+    <div id="admin-file-list"></div>
+</section>
+
+    <script src="js/adminscript.js"></script>
+</body>
+</html>
