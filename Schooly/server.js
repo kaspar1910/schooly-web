@@ -7,7 +7,7 @@ const app = express();
 const PORT = 3000;
 
 const publicFolder = path.join(__dirname, "Public")
-const dataFolder = "C:\\Users\\kaspa\\Desktop\\SchoolyData";
+const dataFolder = "C:\\Users\\kaspa\\Desktop\\Schooly\\SchoolyData";
 
 const storage = multer.diskStorage({
     destination: function (req, file, cb) {
