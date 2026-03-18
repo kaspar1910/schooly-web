@@ -7,7 +7,10 @@ const app = express();
 const PORT = 3000;
 
 const publicFolder = path.join(__dirname, "Public")
-const dataFolder = "C:\\Users\\kaspa\\Desktop\\Schooly-repo\\SchoolyData";
+const dataFolder = process.env.DATA_FOLDER || path.join(__dirname, "data");
+fs.mkdirSync(dataFolder, { recursive: true });
+
+console.log(`Using data folder: ${dataFolder}`);
 
 const storage = multer.diskStorage({
     destination: function (req, file, cb) {

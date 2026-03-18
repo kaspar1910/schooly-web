@@ -1,0 +1,11 @@
+services:
+  app:
+    build: .
+    container_name: schooly-container
+    ports:
+      - "3000:3000"
+    environment:
+      DATA_FOLDER: /app/data
+    volumes:
+        - C:\Schooly\SchoolyData:/app/data
+    restart: unless-stopped
