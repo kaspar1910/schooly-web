@@ -5,6 +5,7 @@ const fs = require("fs");
 const fsp = require("fs/promises");
 const session = require("express-session");
 const bcrypt = require("bcrypt");
+const SQLiteStore = require("connect-sqlite3")(session);
 require("dotenv").config();
 
 const app = express();
@@ -16,12 +17,14 @@ const ADMIN_PASSWORD_HASH = process.env.ADMIN_PASSWORD_HASH;
 const publicFolder = path.join(__dirname, "Public");
 const privateFolder = path.join(__dirname, "private");
 const dataFolder = process.env.DATA_FOLDER || path.join(__dirname, "data");
+const sessionFolder = path.join(__dirname, "sessions");
 
 if (!SESSION_SECRET || !ADMIN_PASSWORD_HASH) {
     throw new Error("Missing SESSION_SECRET or ADMIN_PASSWORD_HASH in .env");
 }
 
 fs.mkdirSync(dataFolder, { recursive: true });
+fs.mkdirSync(sessionFolder, { recursive: true });
 
 console.log(`Using data folder: ${dataFolder}`);
 
@@ -41,6 +44,11 @@ app.use(express.urlencoded({ extended: false }));
 
 app.use(
     session({
+        store: new SQLiteStore({
+            db: "sessions.sqlite",
+            dir: sessionFolder,
+            concurrentDB: true
+        }),
         name: "schooly.sid",
         secret: SESSION_SECRET,
         resave: false,
