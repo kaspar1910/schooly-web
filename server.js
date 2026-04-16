@@ -13,6 +13,7 @@ const app = express();
 const PORT = process.env.PORT || 3000;
 const SESSION_SECRET = process.env.SESSION_SECRET;
 const ADMIN_PASSWORD_HASH = process.env.ADMIN_PASSWORD_HASH;
+const NODE_ENV = process.env.NODE_ENV || 'development';
 
 const publicFolder = path.join(__dirname, "Public");
 const privateFolder = path.join(__dirname, "private");
@@ -56,7 +57,7 @@ app.use(
         cookie: {
             httpOnly: true,
             sameSite: "lax",
-            secure: "auto",
+            secure: NODE_ENV === 'production',
             maxAge: 60 * 60 * 1000
         }
     })
